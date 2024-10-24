@@ -37,6 +37,7 @@ public class IntList {
     }
 
     /** Method to return a string representation of an IntList */
+
     public String toString() {
         if (rest == null) {
             // Converts an Integer to a String!
@@ -45,7 +46,12 @@ public class IntList {
             return first + " -> " + rest.toString();
         }
     }
-
+    /*
+    public static String toString(IntList list) {
+        if (list == null) {return "null";}
+        if(list.rest==null)return String.valueOf(list.first);
+        else return list.first+"->"+toString(list.rest);
+    }*/
     /**
      * Method to create an IntList from an argument list.
      * You don't have to understand this code. We have it here
