@@ -53,12 +53,14 @@ public enum Side {
 
     /** Return the standard column number for square (C, R) on a board
      *  of size SIZE oriented with this Side on top. */
+    //(c,r)的标准列号
     public int col(int c, int r, int size) {
         return col0 * (size - 1) + c * drow + r * dcol;
     }
 
     /** Return the standard row number for square (C, R) on a board
      *  of size SIZE oriented with this Side on top. */
+    //(c,r)的标准行号
     public int row(int c, int r, int size) {
         return row0 * (size - 1) - c * dcol + r * drow;
     }

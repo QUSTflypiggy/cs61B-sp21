@@ -2,8 +2,6 @@ package game2048;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /** Tests the tilt() method in the up (Side.NORTH) direction only.
  *
  * @author Omar Khan
@@ -55,6 +53,7 @@ public class TestUpOnly extends TestUtils {
         boolean changed = model.tilt(Side.NORTH);
         checkChanged(Side.NORTH, true, changed);
         checkModel(after, 4, 0, prevBoard, Side.NORTH);
+        //assertEquals(after, before.toString());
     }
 
     @Test

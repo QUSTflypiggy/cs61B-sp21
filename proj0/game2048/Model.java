@@ -113,11 +113,26 @@ public class Model extends Observable {
         // TODO: Modify this.board (and perhaps this.score) to account
         // for the tilt to the Side SIDE. If the board changed, set the
         // changed local variable to true.
-
+        board.setViewingPerspective(side);
+        for(int i=0;i<board.size();i++) {//列
+            int k=board.size()-1;
+            for(int j=board.size()-2;j>=0;j--) {//行
+                Tile tt=board.tile(i,j);
+                if(tt==null)continue;
+                while(k>j&&board.tile(i,k)!=null&&board.tile(i,k).value()!=tt.value()) {k--;}
+                if(k==j)continue;
+                if(board.move(i,k,tt)){
+                    score+=board.tile(i,k).value();
+                    k--;
+                }
+                changed=true;
+            }
+        }
         checkGameOver();
         if (changed) {
             setChanged();
         }
+        board.setViewingPerspective(Side.NORTH);
         return changed;
     }
 
@@ -138,6 +153,12 @@ public class Model extends Observable {
      * */
     public static boolean emptySpaceExists(Board b) {
         // TODO: Fill in this function.
+        for(int row = 0; row < b.size(); row++) {
+            for(int col = 0; col < b.size(); col++) {
+                if(b.tile(col,row)==null)return true;
+                //if(b.tile(col,row).value()==0)return true;
+            }
+        }
         return false;
     }
 
@@ -148,6 +169,13 @@ public class Model extends Observable {
      */
     public static boolean maxTileExists(Board b) {
         // TODO: Fill in this function.
+        for(int row = 0; row < b.size(); row++) {
+            for(int col = 0; col < b.size(); col++) {
+                if(b.tile(col,row)!=null){
+                    if(b.tile(col,row).value()==MAX_PIECE)return true;
+                };
+            }
+        }
         return false;
     }
 
@@ -159,6 +187,20 @@ public class Model extends Observable {
      */
     public static boolean atLeastOneMoveExists(Board b) {
         // TODO: Fill in this function.
+        for(int row = 0; row < b.size(); row++) {
+            for(int col = 0; col < b.size(); col++) {
+                if(b.tile(col,row)==null){return true;}
+            }
+        }
+        for(int row = 0; row < b.size()-1; row++) {
+            for(int col = 0; col < b.size()-1; col++) {
+                if(b.tile(col,row).value()==b.tile(col+1,row).value()){return true;}
+                if(b.tile(col,row).value()==b.tile(col,row+1).value()){return true;}
+            }
+        }
+        for(int row = 0; row < b.size()-1; row++) {
+            if(b.tile(3,row).value()==b.tile(3,row+1).value()){return true;}
+        }
         return false;
     }
 

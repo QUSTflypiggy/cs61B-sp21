@@ -1,11 +1,8 @@
 package game2048;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Formatter;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
 
 /**
  * @author hug
@@ -35,6 +32,7 @@ public class Board implements Iterable<Tile> {
         for (int col = 0; col < size; col += 1) {
             for (int row = 0; row < size; row += 1) {
                 int value = rawValues[size - 1 - row][col];
+
                 Tile tile;
                 if (value == 0) {
                     tile = null;
@@ -86,11 +84,15 @@ public class Board implements Iterable<Tile> {
      * Returns whether or not this move is a merge.
      * */
     public boolean move(int col, int row, Tile tile) {
+        //把tile移动到第col列，第row行
+        //第pcol列，第prow行
         int pcol = viewPerspective.col(col, row, size()),
                 prow = viewPerspective.row(col, row, size());
+
         if (tile.col() == pcol && tile.row() == prow) {
             return false;
         }
+
         Tile tile1 = vtile(col, row, viewPerspective);
         values[tile.col()][tile.row()] = null;
 
