@@ -1,4 +1,5 @@
 package timingtest;
+
 import edu.princeton.cs.algs4.Stopwatch;
 
 /**
@@ -23,5 +24,32 @@ public class TimeAList {
 
     public static void timeAListConstruction() {
         // TODO: YOUR CODE HERE
+        AList<Integer> Ns = new AList<>();
+        AList<Double> times = new AList<>();
+        AList<Integer> opCounts = new AList<>();
+        int p=1000;
+        while(p<=128000){
+            Ns.addLast(p);
+            opCounts.addLast(p);
+            p=p*2;
+        }
+        for(int i=0;i<Ns.size();i++){
+            int N = Ns.get(i);
+            int j=0;
+            AList<Integer>sf=new AList<>();
+            Stopwatch sw = new Stopwatch();
+            while(j!=N){
+                j++;
+                sf.addLast(j);
+            }
+
+            double ti=sw.elapsedTime();
+            times.addLast(ti);
+        }
+        printTimingTable(Ns, times, opCounts);
     }
 }
+
+
+
+
