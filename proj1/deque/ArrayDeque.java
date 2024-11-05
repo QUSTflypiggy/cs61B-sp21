@@ -27,7 +27,7 @@ public class ArrayDeque<T> implements Deque<T>{
 
     @Override
     // 在前端添加元素
-    public void addfirst(T item) {
+    public void addFirst(T item) {
         if (size == array.length) {
             resize(array.length * 2);
         }
@@ -38,7 +38,7 @@ public class ArrayDeque<T> implements Deque<T>{
 
     @Override
     // 在后端添加元素
-    public void addlast(T item) {
+    public void addLast(T item) {
         if (size == array.length) {
             resize(array.length * 2);
         }
@@ -49,7 +49,7 @@ public class ArrayDeque<T> implements Deque<T>{
 
     @Override
     // 从前端删除元素
-    public T removefirst() {
+    public T removeFirst() {
         if (isEmpty()) return null;
         T removedItem = array[front];
         array[front] = null; // 避免内存泄漏
@@ -66,7 +66,7 @@ public class ArrayDeque<T> implements Deque<T>{
 
     @Override
     // 从后端删除元素
-    public T removelast() {
+    public T removeLast() {
         if (isEmpty()) return null;
         back = (back - 1 + array.length) % array.length;
         T removedItem = array[back];

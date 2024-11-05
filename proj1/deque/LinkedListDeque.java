@@ -25,7 +25,7 @@ public class LinkedListDeque<T> implements Deque<T>{
     }
 
     @Override
-    public void addfirst(T item) {
+    public void addFirst(T item) {
         //值，上一个点（哨兵节点），下一个点（原来第一个节点）
         Node newNode = new Node(item, sentinel, sentinel.next);
         //更新原头节点
@@ -36,7 +36,7 @@ public class LinkedListDeque<T> implements Deque<T>{
     }
 
     @Override
-    public void addlast(T item) {
+    public void addLast(T item) {
         Node newNode=new Node(item,sentinel.prev,sentinel);
         sentinel.prev.next=newNode;
         sentinel.prev=newNode;
@@ -44,7 +44,7 @@ public class LinkedListDeque<T> implements Deque<T>{
     }
 
     @Override
-    public T removefirst() {
+    public T removeFirst() {
         if(size==0)return null;
         Node fn=sentinel.next;
         T item=fn.item;
@@ -55,7 +55,7 @@ public class LinkedListDeque<T> implements Deque<T>{
     }
 
     @Override
-    public T removelast() {
+    public T removeLast() {
         if(size==0)return null;
         Node ln=sentinel.prev;
         T item=ln.item;
