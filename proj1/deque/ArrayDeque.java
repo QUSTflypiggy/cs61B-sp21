@@ -1,6 +1,6 @@
 package deque;
 
-public class ArrayDeque<T> {
+public class ArrayDeque<T> implements Deque<T>{
     private T[] array;
     private int front;
     private int back;
@@ -25,8 +25,9 @@ public class ArrayDeque<T> {
         array = newArray;
     }
 
+    @Override
     // 在前端添加元素
-    public void addFirst(T item) {
+    public void addfirst(T item) {
         if (size == array.length) {
             resize(array.length * 2);
         }
@@ -35,8 +36,9 @@ public class ArrayDeque<T> {
         size++;
     }
 
+    @Override
     // 在后端添加元素
-    public void addLast(T item) {
+    public void addlast(T item) {
         if (size == array.length) {
             resize(array.length * 2);
         }
@@ -45,8 +47,9 @@ public class ArrayDeque<T> {
         size++;
     }
 
+    @Override
     // 从前端删除元素
-    public T removeFirst() {
+    public T removefirst() {
         if (isEmpty()) return null;
         T removedItem = array[front];
         array[front] = null; // 避免内存泄漏
@@ -61,8 +64,9 @@ public class ArrayDeque<T> {
         return removedItem;
     }
 
+    @Override
     // 从后端删除元素
-    public T removeLast() {
+    public T removelast() {
         if (isEmpty()) return null;
         back = (back - 1 + array.length) % array.length;
         T removedItem = array[back];
@@ -77,6 +81,7 @@ public class ArrayDeque<T> {
         return removedItem;
     }
 
+    @Override
     // 获取指定位置的元素
     public T get(int index) {
         if (index < 0 || index >= size) return null;
@@ -88,8 +93,4 @@ public class ArrayDeque<T> {
         return size;
     }
 
-    // 判断 deque 是否为空
-    public boolean isEmpty() {
-        return size == 0;
-    }
 }

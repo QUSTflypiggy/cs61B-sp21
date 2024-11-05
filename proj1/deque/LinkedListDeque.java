@@ -1,6 +1,6 @@
 package deque;
 
-public class LinkedListDeque<T> {
+public class LinkedListDeque<T> implements Deque<T>{
 
     //哨兵节点
     private class Node{
@@ -24,15 +24,8 @@ public class LinkedListDeque<T> {
         size=0;
     }
 
-    public boolean isEmpty() {
-        return size==0;
-    }
-
-    public int size() {
-        return size;
-    }
-
-    public void addFirst(T item) {
+    @Override
+    public void addfirst(T item) {
         //值，上一个点（哨兵节点），下一个点（原来第一个节点）
         Node newNode = new Node(item, sentinel, sentinel.next);
         //更新原头节点
@@ -42,11 +35,39 @@ public class LinkedListDeque<T> {
         size++;
     }
 
-    public void addLast(T item) {
+    @Override
+    public void addlast(T item) {
         Node newNode=new Node(item,sentinel.prev,sentinel);
         sentinel.prev.next=newNode;
         sentinel.prev=newNode;
         size++;
+    }
+
+    @Override
+    public T removefirst() {
+        if(size==0)return null;
+        Node fn=sentinel.next;
+        T item=fn.item;
+        sentinel.next=fn.next;
+        fn.next.prev=sentinel;
+        size--;
+        return item;
+    }
+
+    @Override
+    public T removelast() {
+        if(size==0)return null;
+        Node ln=sentinel.prev;
+        T item=ln.item;
+        sentinel.prev=ln.prev;
+        ln.prev.next=sentinel;
+        size--;
+        return item;
+    }
+
+    @Override
+    public int size() {
+        return size;
     }
 
     public void printDeque() {
@@ -58,26 +79,7 @@ public class LinkedListDeque<T> {
         }
     }
 
-    public T removeFirst() {
-        if(size==0)return null;
-        Node fn=sentinel.next;
-        T item=fn.item;
-        sentinel.next=fn.next;
-        fn.next.prev=sentinel;
-        size--;
-        return item;
-    }
-
-    public T removeLast() {
-        if(size==0)return null;
-        Node ln=sentinel.prev;
-        T item=ln.item;
-        sentinel.prev=ln.prev;
-        ln.prev.next=sentinel;
-        size--;
-        return item;
-    }
-
+    @Override
     public T get(int x){
         if(x<0||x>size)return null;
         Node be=sentinel.next;
