@@ -94,6 +94,14 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
         return array[(front + index) % array.length];
     }
 
+    @Override
+    public void printDeque() {
+        for (int i = 0; i < size; i++) {
+            System.out.print(array[(front + i) % array.length] + " ");
+        }
+        System.out.println();
+    }
+
     // 获取当前 deque 中的元素个数
     public int size() {
         return size;
@@ -119,4 +127,35 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
             return get(currentpl++);
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        // 检查是否为同一对象实例
+        if (this == o) {
+            return true;
+        }
+
+        // 检查对象类型
+        if (!(o instanceof ArrayDeque<?>)) {
+            return false;
+        }
+
+        // 将对象转换为 ArrayDeque 并检查大小
+        ArrayDeque<?> other = (ArrayDeque<?>) o;
+        if (this.size != other.size) {
+            return false;
+        }
+
+        // 逐个比较元素
+        for (int i = 0; i < size; i++) {
+            T thisItem = this.get(i);
+            Object otherItem = other.get(i);
+            if (!thisItem.equals(otherItem)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 }

@@ -72,6 +72,7 @@ public class LinkedListDeque<T> implements Iterable<T>,Deque<T>{
         return size;
     }
 
+    @Override
     public void printDeque() {
         //if(isEmpty())System.out.println("sdf");
         Node np=sentinel.next;
@@ -121,4 +122,36 @@ public class LinkedListDeque<T> implements Iterable<T>,Deque<T>{
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        // 检查是否为同一个对象实例
+        if (this == o) {
+            return true;
+        }
+
+        // 检查对象类型
+        if (!(o instanceof LinkedListDeque<?>)) {
+            return false;
+        }
+
+        // 将对象转换为 LinkedListDeque 并检查大小
+        LinkedListDeque<?> other = (LinkedListDeque<?>) o;
+        if (this.size != other.size) {
+            return false;
+        }
+
+        // 逐个比较元素
+        Node current = this.sentinel.next;
+        Node otherCurrent = (Node) other.sentinel.next;
+
+        while (current != sentinel) {
+            if (!current.item.equals(otherCurrent.item)) {
+                return false;
+            }
+            current = current.next;
+            otherCurrent = otherCurrent.next;
+        }
+
+        return true;
+    }
 }
