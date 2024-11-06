@@ -1,6 +1,8 @@
 package deque;
 
-public class LinkedListDeque<T> implements Deque<T>{
+import java.util.Iterator;
+
+public class LinkedListDeque<T> implements Iterable<T>,Deque<T>{
 
     //哨兵节点
     private class Node{
@@ -97,6 +99,26 @@ public class LinkedListDeque<T> implements Deque<T>{
     public T getRHelp(int x,Node p){
         if(x==0)return p.item;
         return getRHelp(x-1,p.next);
+    }
+
+    public Iterator<T> iterator() {
+        return new LinkedListDeque.dequeIterator();
+    }
+
+    private class dequeIterator implements Iterator<T> {
+        private int currentpl;
+        public dequeIterator() {
+            currentpl = 0;
+        }
+        @Override
+        public boolean hasNext() {
+            return currentpl < size;
+        }
+
+        @Override
+        public T next() {
+            return get(currentpl++);
+        }
     }
 
 }

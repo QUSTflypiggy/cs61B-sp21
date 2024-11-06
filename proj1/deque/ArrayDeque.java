@@ -1,6 +1,8 @@
 package deque;
 
-public class ArrayDeque<T> implements Deque<T>{
+import java.util.Iterator;
+
+public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
     private T[] array;
     private int front;
     private int back;
@@ -50,7 +52,9 @@ public class ArrayDeque<T> implements Deque<T>{
     @Override
     // 从前端删除元素
     public T removeFirst() {
-        if (isEmpty()) return null;
+        if (isEmpty()) {
+            return null;
+        }
         T removedItem = array[front];
         array[front] = null; // 避免内存泄漏
         front = (front + 1) % array.length;
@@ -67,7 +71,9 @@ public class ArrayDeque<T> implements Deque<T>{
     @Override
     // 从后端删除元素
     public T removeLast() {
-        if (isEmpty()) return null;
+        if (isEmpty()) {
+            return null;
+        }
         back = (back - 1 + array.length) % array.length;
         T removedItem = array[back];
         array[back] = null; // 避免内存泄漏
@@ -84,7 +90,7 @@ public class ArrayDeque<T> implements Deque<T>{
     @Override
     // 获取指定位置的元素
     public T get(int index) {
-        if (index < 0 || index >= size) return null;
+        if (index < 0 || index >= size) {return null;}
         return array[(front + index) % array.length];
     }
 
@@ -93,4 +99,24 @@ public class ArrayDeque<T> implements Deque<T>{
         return size;
     }
 
+    @Override
+    public Iterator<T> iterator() {
+        return new dequeIterator();
+    }
+
+    private class dequeIterator implements Iterator<T> {
+        private int currentpl;
+        public dequeIterator() {
+            currentpl = 0;
+        }
+        @Override
+        public boolean hasNext() {
+            return currentpl < size;
+        }
+
+        @Override
+        public T next() {
+            return get(currentpl++);
+        }
+    }
 }

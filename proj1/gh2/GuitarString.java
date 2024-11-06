@@ -61,10 +61,7 @@ public class GuitarString {
         //       **Do not call StdAudio.play().**
 
             double d=(double)lld.removeFirst();
-            d+=(double)lld.get(0);
-            d*=0.5;
-            d*=DECAY;
-            lld.addLast(d);
+            lld.addLast((d+(double)lld.get(0))*0.5*DECAY);
 
     }
 
