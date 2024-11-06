@@ -130,10 +130,10 @@ public class LinkedListDeque<T> implements Iterable<T>,Deque<T>{
         }
 
         // 检查对象类型
-        /*
-        if (!(o instanceof LinkedListDeque<?>)) {
+
+        if (!(o instanceof Deque<?>)) {
             return false;
-        }*/
+        }
 
         // 将对象转换为 LinkedListDeque 并检查大小
         LinkedListDeque<?> other = (LinkedListDeque<?>) o;
