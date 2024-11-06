@@ -101,7 +101,7 @@ public class ArrayDeque<T> implements Iterable<T>, Deque<T>{
 
     @Override
     public Iterator<T> iterator() {
-        return new dequeIterator();
+        return new ArrayDeque.dequeIterator();
     }
 
     private class dequeIterator implements Iterator<T> {
